@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>건축설계 포트폴리오 | Architecture & Design</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Noto Sans KR (본문용), Playfair Display (제목/영문 포인트용) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        arch: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for a polished look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569; 
+        }
+
+        /* Fade-in animation classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Image hover overlay effect */
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-arch-50 text-arch-800 font-sans antialiased selection:bg-arch-800 selection:text-white">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="font-serif text-2xl font-bold tracking-tighter text-arch-900">
+                        STUDIO<span class="text-gray-400">.</span>ARCH
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-sm font-medium text-gray-600 hover:text-arch-900 transition-colors">Home</a>
+                    <a href="#projects" class="text-sm font-medium text-gray-600 hover:text-arch-900 transition-colors">Projects</a>
+                    <a href="#about" class="text-sm font-medium text-gray-600 hover:text-arch-900 transition-colors">About</a>
+                    <a href="#contact" class="text-sm font-medium text-gray-600 hover:text-arch-900 transition-colors">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-arch-900 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-50">Home</a>
+                <a href="#projects" class="block px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-50">Projects</a>
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-50">About</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-50">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80" 
+                 alt="Modern Architecture Background" 
+                 class="w-full h-full object-cover object-center"
+                 onerror="this.src='https://placehold.co/1920x1080/1e293b/ffffff?text=Architecture+Hero'">
+            <div class="absolute inset-0 bg-arch-900/40"></div> <!-- Dark overlay for text readability -->
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto reveal">
+            <h1 class="font-serif text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                공간에 숨결을 <br class="hidden md:block"/> 불어넣다.
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-10 font-light max-w-2xl mx-auto tracking-wide">
+                미학과 실용성의 완벽한 조화. <br class="md:hidden"/> 
+                자연과 사람, 그리고 공간이 소통하는 지속 가능한 건축을 지향합니다.
+            </p>
+            <a href="#projects" class="inline-flex items-center px-8 py-4 bg-white text-arch-900 text-sm font-bold uppercase tracking-widest hover:bg-gray-100 transition-colors duration-300">
+                View Projects <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+            </a>
+        </div>
+    </section>
+
+    <section id="projects" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="mb-16 reveal text-center md:text-left">
+                <h2 class="font-serif text-4xl font-bold text-arch-900 mb-4">Selected Works</h2>
+                <div class="w-12 h-1 bg-arch-900 mx-auto md:mx-0"></div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                
+                <!-- Project 1 -->
+                <div class="project-card group relative overflow-hidden bg-gray-100 reveal cursor-pointer">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" 
+                             alt="Urban Oasis Project" 
+                             class="w-full h-full object-cover transition-transform duration-700 ease-in-out"
+                             onerror="this.src='https://placehold.co/800x600/e2e8f0/1e293b?text=Urban+Oasis'">
+                    </div>
+                    <div class="project-overlay absolute inset-0 bg-arch-900/80 opacity-0 transition-opacity duration-500 flex flex-col justify-end p-8">
+                        <span class="text-gray-300 text-sm font-medium tracking-wider mb-2">COMMERCIAL / 2024</span>
+                        <h3 class="text-2xl font-serif text-white font-bold mb-3">도심 속 오아시스 (Urban Oasis)</h3>
+                        <p class="text-gray-400 text-sm line-clamp-2">도심의 삭막함 속에 자연을 품은 복합 상업 시설. 빛과 바람이 통하는 중정 디자인이 특징입니다.</p>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card group relative overflow-hidden bg-gray-100 reveal cursor-pointer mt-0 md:mt-12">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" 
+                             alt="The Glass Pavilion" 
+                             class="w-full h-full object-cover transition-transform duration-700 ease-in-out"
+                             onerror="this.src='https://placehold.co/800x600/e2e8f0/1e293b?text=Glass+Pavilion'">
+                    </div>
+                    <div class="project-overlay absolute inset-0 bg-arch-900/80 opacity-0 transition-opacity duration-500 flex flex-col justify-end p-8">
+                        <span class="text-gray-300 text-sm font-medium tracking-wider mb-2">RESIDENTIAL / 2023</span>
+                        <h3 class="text-2xl font-serif text-white font-bold mb-3">빛의 마루 (The Glass Pavilion)</h3>
+                        <p class="text-gray-400 text-sm line-clamp-2">전면 유리 파사드를 통해 자연광을 극대화한 개인 주택. 미니멀리즘의 정수를 담았습니다.</p>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card group relative overflow-hidden bg-gray-100 reveal cursor-pointer">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1541881451155-83395d985a9f?auto=format&fit=crop&w=800&q=80" 
+                             alt="Eco Library" 
+                             class="w-full h-full object-cover transition-transform duration-700 ease-in-out"
+                             onerror="this.src='https://placehold.co/800x600/e2e8f0/1e293b?text=Eco+Library'">
+                    </div>
+                    <div class="project-overlay absolute inset-0 bg-arch-900/80 opacity-0 transition-opacity duration-500 flex flex-col justify-end p-8">
+                        <span class="text-gray-300 text-sm font-medium tracking-wider mb-2">PUBLIC / 2022</span>
+                        <h3 class="text-2xl font-serif text-white font-bold mb-3">숲속 도서관 (Eco Library)</h3>
+                        <p class="text-gray-400 text-sm line-clamp-2">목구조를 활용하여 탄소 발자국을 줄인 친환경 공공 도서관 설계 프로젝트입니다.</p>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card group relative overflow-hidden bg-gray-100 reveal cursor-pointer mt-0 md:mt-12">
+                    <div class="aspect-[4/3] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" 
+                             alt="Minimalist Office" 
+                             class="w-full h-full object-cover transition-transform duration-700 ease-in-out"
+                             onerror="this.src='https://placehold.co/800x600/e2e8f0/1e293b?text=Office+Space'">
+                    </div>
+                    <div class="project-overlay absolute inset-0 bg-arch-900/80 opacity-0 transition-opacity duration-500 flex flex-col justify-end p-8">
+                        <span class="text-gray-300 text-sm font-medium tracking-wider mb-2">OFFICE / 2022</span>
+                        <h3 class="text-2xl font-serif text-white font-bold mb-3">크리에이티브 스튜디오 (Creative Space)</h3>
+                        <p class="text-gray-400 text-sm line-clamp-2">노출 콘크리트와 스틸 소재를 활용하여 날것의 매력을 살린 업무 공간입니다.</p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- View All Button -->
+            <div class="mt-16 text-center reveal">
+                <a href="#" class="inline-flex items-center text-arch-900 font-bold hover:text-gray-500 transition-colors">
+                    <span class="border-b-2 border-arch-900 pb-1">View All Projects</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 bg-arch-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Profile Image -->
+                <div class="relative reveal">
+                    <div class="aspect-[4/5] bg-gray-200 overflow-hidden relative z-10">
+                        <!-- Using a placeholder for architect portrait -->
+                        <img src="https://images.unsplash.com/photo-1507537362848-9c7370cb12ba?auto=format&fit=crop&w=800&q=80" 
+                             alt="Architect Portrait" 
+                             class="w-full h-full object-cover"
+                             onerror="this.src='https://placehold.co/800x1000/cbd5e1/1e293b?text=Architect+Portrait'">
+                    </div>
+                    <!-- Decorative block behind image -->
+                    <div class="absolute -bottom-6 -right-6 w-full h-full border-2 border-arch-900 z-0 hidden md:block"></div>
+                </div>
+
+                <!-- Biography & Philosophy -->
+                <div class="reveal">
+                    <h2 class="font-serif text-4xl font-bold text-arch-900 mb-6">Philosophy.</h2>
+                    <p class="text-xl text-gray-800 font-medium mb-6 leading-relaxed">
+                        "건축은 단순한 조형물이 아닌, 그곳에 머무는 사람들의 삶을 담아내는 정교한 그릇입니다."
+                    </p>
+                    <div class="space-y-4 text-gray-600 font-light leading-relaxed mb-10">
+                        <p>
+                            안녕하세요. 건축가 <strong>홍길동(Hong Gildong)</strong>입니다. 
+                            지난 10년간 다양한 규모의 주거 공간, 상업 시설, 공공 건축 프로젝트를 이끌며 공간이 인간에게 미치는 영향에 대해 끊임없이 연구해 왔습니다.
+                        </p>
+                        <p>
+                            저의 설계 철학은 <strong>'본질에 충실한 공간'</strong>을 만드는 것입니다. 
+                            불필요한 장식을 덜어내고, 빛과 그림자, 재료의 물성, 그리고 주변 환경과의 맥락을 이해하여 시간이 지나도 변치 않는 가치를 지닌 건축물을 만듭니다.
+                        </p>
+                    </div>
+                    
+                    <!-- Stats / Details -->
+                    <div class="grid grid-cols-2 gap-8 border-t border-gray-200 pt-8">
+                        <div>
+                            <h4 class="font-bold text-arch-900 text-3xl font-serif mb-2">10+</h4>
+                            <p class="text-sm text-gray-500 uppercase tracking-widest">Years Experience</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-arch-900 text-3xl font-serif mb-2">45</h4>
+                            <p class="text-sm text-gray-500 uppercase tracking-widest">Completed Projects</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 bg-arch-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <!-- Contact Info -->
+                <div class="reveal">
+                    <h2 class="font-serif text-4xl font-bold mb-6">Let's Talk.</h2>
+                    <p class="text-gray-400 mb-12 font-light leading-relaxed max-w-md">
+                        새로운 프로젝트에 대한 논의, 협업 제안 등 언제든지 환영합니다. 아래 연락처를 통해 편하게 문의해 주세요.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <i data-lucide="map-pin" class="w-6 h-6 text-gray-400 mr-4 mt-1"></i>
+                            <div>
+                                <h5 class="font-medium text-white mb-1">Studio Address</h5>
+                                <p class="text-gray-400 text-sm font-light">서울특별시 강남구 테헤란로 123<br>건축빌딩 4층, 06234</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i data-lucide="mail" class="w-6 h-6 text-gray-400 mr-4 mt-1"></i>
+                            <div>
+                                <h5 class="font-medium text-white mb-1">Email</h5>
+                                <p class="text-gray-400 text-sm font-light">contact@studio-arch.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i data-lucide="phone" class="w-6 h-6 text-gray-400 mr-4 mt-1"></i>
+                            <div>
+                                <h5 class="font-medium text-white mb-1">Phone</h5>
+                                <p class="text-gray-400 text-sm font-light">+82 02-1234-5678</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-white/5 p-8 reveal backdrop-blur-sm">
+                    <form onsubmit="handleFormSubmit(event)" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                            <input type="text" id="name" required class="w-full bg-transparent border-b border-gray-600 focus:border-white text-white px-0 py-2 focus:outline-none transition-colors rounded-none placeholder-gray-600" placeholder="이름을 입력하세요">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                            <input type="email" id="email" required class="w-full bg-transparent border-b border-gray-600 focus:border-white text-white px-0 py-2 focus:outline-none transition-colors rounded-none placeholder-gray-600" placeholder="이메일을 입력하세요">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                            <textarea id="message" rows="4" required class="w-full bg-transparent border-b border-gray-600 focus:border-white text-white px-0 py-2 focus:outline-none transition-colors rounded-none resize-none placeholder-gray-600" placeholder="프로젝트 내용이나 문의사항을 적어주세요"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-white text-arch-900 font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors">
+                            Send Message
+                        </button>
+                    </form>
+                    <!-- Success Message placeholder -->
+                    <div id="form-success" class="hidden mt-4 p-4 bg-green-900/50 border border-green-500 text-green-200 text-sm rounded">
+                        메시지가 성공적으로 전송되었습니다. 곧 연락드리겠습니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-arch-900 border-t border-white/10 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-500 text-sm font-light mb-4 md:mb-0">
+                &copy; 2026 STUDIO.ARCH. All rights reserved.
+            </p>
+            <div class="flex space-x-6">
+                <a href="#" class="text-gray-500 hover:text-white transition-colors">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-white transition-colors">
+                    <i data-lucide="linkedin" class="w-5 h-5"></i>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-white transition-colors">
+                    <i data-lucide="twitter" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle Logic
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileLinks = menu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Scroll Animation Logic (Intersection Observer)
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            
+            // For simple scroll trigger without Intersection Observer API for wider compatibility
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        reveal();
+
+        // Navbar transparent-to-solid effect on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-sm');
+                navbar.classList.replace('bg-white/90', 'bg-white');
+            } else {
+                navbar.classList.remove('shadow-sm');
+                navbar.classList.replace('bg-white', 'bg-white/90');
+            }
+        });
+
+        // Handle Form Submission (Mockup)
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            // Hide form inputs
+            e.target.style.display = 'none';
+            // Show success message
+            document.getElementById('form-success').classList.remove('hidden');
+            document.getElementById('form-success').classList.add('block');
+        }
+    </script>
+</body>
+</html>
